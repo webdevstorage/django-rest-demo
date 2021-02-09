@@ -6,6 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import (
     AllowAny, 
+    DjangoModelPermissions, 
     IsAdminUser,
     DjangoModelPermissionsOrAnonReadOnly
     )
@@ -32,7 +33,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     ordering_fields = ('id', 'name', )
     ordering = ('id', ) # default order
     lookup_field = 'doc_num' # this will turn url parms into name field. name should be unique
-    permission_classes = [AllowAny, ]
+    authentication_classes = [TokenAuthentication,]
 
     def get_queryset(self):
         # this is where you catch query params
@@ -122,11 +123,10 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class ProfessionViewSet(viewsets.ModelViewSet):
-    # queryset = objects.all() will pull all objects in database.
     queryset = Profession.objects.all()
     serializer_class = ProfessionSerializer
-    # authentication_classes = [TokenAuthentication, ]
-    permission_classes = [AllowAny, ]
+    authentication_classes = [TokenAuthentication, ]
+    permission_classes = [IsAdminUser,]
 
 class DataSheetViewSet(viewsets.ModelViewSet):
     queryset = DataSheet.objects.all()
@@ -136,5 +136,5 @@ class DataSheetViewSet(viewsets.ModelViewSet):
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
