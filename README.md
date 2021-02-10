@@ -1,5 +1,9 @@
 # API
 
+Customer database API example.
+
+Create a customer object and link any data sheet, profession, and documents.
+
 ### GET /api/
 Get a list of all endpoints in the API
 
