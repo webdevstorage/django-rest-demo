@@ -33,7 +33,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     'na1r.services.adobe.com',
     'localhost',
-    'django-rest-demo-12345.herokuapp.com',
+    '127.0.0.1',
+    '.herokuapp.com',
 ]
 
 
