@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
     'na1r.services.adobe.com',
     'localhost',
     '127.0.0.1',
-    '.herokuapp.com',
+    '.herokuapp.com'
 ]
 
 
